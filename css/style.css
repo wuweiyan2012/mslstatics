@@ -1,0 +1,818 @@
+@charset "utf-8";
+
+/* 重写 css [start] */
+*{ margin: 0px; padding: 0px; }
+
+html,body {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family:sans-serif;
+}
+
+body
+{
+    font-size: 0.8rem;
+    box-sizing: border-box;
+}
+
+ul, li {
+    list-style: none;
+}
+
+::-webkit-input-placeholder    /* WebKit browsers */
+{
+    color: #555;
+}
+
+div, p, span, i, b, ul, li, img, a
+{
+    box-sizing: border-box;
+}
+
+b, i
+{
+    font-style: normal;
+}
+/* 重写 css [end]*/
+
+/* common css [start] */
+.hidden
+{
+    display: none !important;
+}
+
+.text-omit {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+
+.clearfix:after
+{
+    content:"";
+    display: table;
+    clear: both;
+}
+
+.wraper
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.page-group
+{
+    position: relative;
+    top:0;
+    left:0;
+    width: 100%;
+    max-width: 768px;
+    height: 100%;
+    margin:0 auto;
+    overflow: visible;
+
+    transition: transform 800ms cubic-bezier(0.4, 0.18, 0.33, 0.95);
+    -webkit-transition: transform 800ms cubic-bezier(0.4, 0.18, 0.33, 0.95);
+}
+
+.page-group .page
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+    background: url(../images/defoult_bg.jpg) no-repeat;
+    background-size: 100% 100%;
+    padding: 2.0rem 1.0rem;
+}
+
+.canvas
+{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:10;
+    width: 100%;
+    height: 100%;
+}
+
+.content
+{
+    position: relative;
+    z-index:20;
+    width: 100%;
+    height: 100%;
+}
+
+.animate-element
+{
+    opacity: 0;
+}
+
+.animate-element.animated
+{
+    opacity: 1;
+    /*animation-timing-function:cubic-bezier(0.445, 0.05, 0.55, 0.95);*/
+}
+
+.swipe-down
+{
+    position: absolute;
+    bottom:0.5rem;
+    left: calc( (100% - 1.2rem) / 2);
+    width:1.2rem;
+    height: 1.2rem;
+    z-index:1000;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAkCAMAAADip6m2AAAAolBMVEUAAAAAAAAAAAAAAAAAAAABAQEAAAAAAAAHBwcAAAD////9/f37+/vt7e25ubn39/cKCgrz8/Pe3t7c3Nz+/v729vbW1tZra2tKSkoAAABpaWlgYGD9/f38/Pz5+fn5+fn39/fz8/Px8fHu7u7q6urm5ubj4+Pd3d3y8vLX19fJycnAwMC4uLisrKyhoaGVlZWGhoajo6MpKSkxMTGAgID///9oDYyzAAAANXRSTlMAAwcLFR0SGRAO+efJbSOcIqBDQvLNbTEpGxEQ9e3h29XDvLOsnJOJiIFpYVlNRkE7MiwfDLl52bwAAAGFSURBVEjH3ZXZboMwFERbHAMhC6EFQtrs+777/3+t98bGjmwqy32plHmLPYfMiYTy9nJ5F/kb693j+O4h7Y567SZjzbYHuDv72WCQxgfSjixpReyRqEWAdmK/YyaTfAHtpivjIo6TUReTZYxxcZzupju/XufP4g660aYD2USmuF13sKeP7Ae6uF13fKZBDRLQ81gTt+rOCmD9MPSBLmaauEV3hWidQOqIr57FLbrpDllCPAghSO9SU7xad3QCNiRQgwAeAn0a6eLVutOC4mRk+SCcToupIW7qsmWnByw25B3Svc6SaeKGbn9LA8UqGsW3fVMc2VJ3eJS6apcUPw5LcVmAq1J30qWBL1mN9gPanZTiUBE3pe5C6cpo4gtRjXkJjtf8cbnSlTHEcz5yTTwBh00UOVToVogfGvibhQq+pCyr0q0Wz1h6kTDsyZObPvn36bckh6qA8YE1eIUEa6GxyyeKEzhC1MLy6byL3yNP4BNn7TSWVRffHYHaI7qq7PB3qMr/mh8s20b2bOZlXQAAAABJRU5ErkJggg==") no-repeat;
+    background-size: 100% auto;
+
+    animation: swipeDown 2s infinite;
+}
+
+@-webkit-keyframes swipeDown {
+    from { transform: translate3d(0,0.4rem,0); opacity: 0; }
+    to { transform: translate3d(0,0,0); opacity:1; }
+}
+
+@keyframes swipeDown {
+    from { transform: translate3d(0,0.4rem,0); opacity: 0; }
+    to { transform: translate3d(0,0,0); opacity:1; }
+}
+
+.title
+{
+    position: relative;
+}
+.title span
+{
+    display: inline-block;
+    font-size:0.7rem;
+    color: white;
+    letter-spacing: 0.1rem;
+    padding: 0.2rem 0.5rem 0.2rem 1.5rem;
+    border-radius: 0.75rem;
+    border:0.05rem solid #e5e5e5;
+}
+
+.title i
+{
+    position: absolute;
+    width: 2.2rem;
+    height: 2.2rem;
+    top: -0.6rem;
+    left: -0.6rem;
+    background: url(../images/icon_wm.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+/*toast msg */
+.toast-msg
+{
+    position: absolute;
+    top: 50%;
+    left:0;
+    border-radius: 0.35rem;
+    max-width: 90%;
+    height: auto;
+    line-height: 1.4rem;
+    padding: 0.6rem 0.8rem;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+
+    z-index: 11000;
+    opacity: 0;
+    -webkit-transition: 400ms opacity;
+    transition: 400ms opacity;
+}
+
+.toast-msg.show
+{
+    opacity: 1;
+}
+
+.toast-msg.hide
+{
+    opacity: 0;
+}
+/* common css [end] */
+
+
+/*首页*/
+.start-title
+{
+    height: 10%;
+    text-align: right;
+}
+.start-title img
+{
+    position: relative;
+    top: -1rem;
+    height: 9.0rem;
+}
+
+.start-logo
+{
+    display: flex;
+    display: -webkit-flex;
+    height: 80%;
+    align-items:center;
+    justify-content: center;
+}
+.start-logo img
+{
+    width: 10rem;
+    height: auto;
+    align-self:center;
+}
+
+
+.start-word
+{
+    height: 10%;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.start-word span
+{
+    color:rgba(228, 228, 228, 0.6);
+    font-size: 0.7rem;
+    letter-spacing: 0.1rem;
+    text-align: center;
+}
+
+/*赛事数据统计*/
+.mcount-title
+{
+    text-align: center;
+}
+.mcount-title img
+{
+    width: 9.6rem;
+    height: auto;
+}
+
+.mcount-content
+{
+    /*padding: 0rem 3.2rem;*/
+    padding: 0rem 1.8rem;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    height: calc(100% - 2.4rem);
+}
+
+
+.mcount-content li
+{
+    display: flex;
+    display: -webkit-flex;
+    align-items: flex-end;
+    flex-grow:1;
+
+}
+
+.mcount-content li span
+{
+    display: inline-block;
+    width: 100%;
+    height: 3rem;
+    background: url(../images/img_date.png) no-repeat;
+    background-size: 100% 100%;
+    padding-top:1.4rem;
+    text-align: center;
+    color:#333;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+}
+
+
+/*参赛选手性别分析*/
+.gender
+{
+    height: 50%;
+}
+
+.gender-title i
+{
+    background-image: url(../images/icon_man_Wm.png);
+}
+
+.gender-content
+{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    padding: 1.2rem 2.5rem;
+}
+
+.gender-content li img
+{
+    display: block;
+    margin: 0 auto;
+    max-width: 3.2rem;
+}
+.gender-content li span
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color:white;
+    letter-spacing: 0.05rem;
+}
+
+
+/*参赛选手年龄分析*/
+.age
+{
+    height: 50%;
+}
+
+.age-title i
+{
+    background-image: url(../images/icon_age.png);
+}
+
+.age-content{
+    margin-top:1.0rem;
+    width: 100%;
+    height: 12rem;
+    background-color: rgb(212, 247, 255);
+}
+
+
+/*各省份举办场次分析*/
+.pro
+{
+    height: 100%;
+}
+
+.pro-title i
+{
+    background-image: url(../images/icon_Heat.png);
+}
+
+.pro .pro-content, .pro .pro-content2
+{
+    height: calc( 100% - 1.5rem);
+}
+
+
+/*查询个人数据*/
+.page-query
+{
+    background: url(../images/login_bg.jpg) no-repeat !important;
+    background-size: 100% 100% !important;
+}
+
+.query
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.query .query-word
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-grow: 3;
+    justify-content: flex-end;
+    height: 10.0rem;
+    overflow: hidden;
+}
+
+.query .query-word img
+{
+    height: 8rem;
+}
+
+.query .query-img
+{
+    height: 4.0rem;
+    text-align: center;
+    flex-grow:0;
+}
+
+.query .query-img img
+{
+    width: 4rem;
+    height: auto;
+}
+
+.query .query-form
+{
+    height: 11.0rem;
+    flex-grow:2;
+    padding-top:0.75rem;
+}
+
+.query .query-form form .form-group + .form-group
+{
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+.query .query-form form .form-group input
+{
+    display: block;
+    width: 100%;
+    height: 1.7rem;
+    border:0;
+    border-radius: 0.4rem;
+    background-color: rgba(255,255,255, 0.35);
+    padding:0.5rem 1.0rem;
+    box-sizing: border-box;
+}
+
+.query .query-form form .form-group input:focus
+{
+    outline: 0px;
+}
+
+.query .query-form form .form-group button
+{
+    border:0;
+    border-radius: 0.3rem;
+    padding:0.4rem 2.0rem;
+    background-color: rgba(131, 29, 36, 0.9);
+    color: white;
+    margin-top: 1.0rem;
+    letter-spacing: 0.1rem;
+
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0.6; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.6; }
+}
+
+@-webkit-keyframes blink {
+    0% { opacity: 0.6; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.6; }
+}
+
+.ver-group
+{
+    display: flex;
+    display: -webkit-flex;
+    align-items: stretch;
+    height: 1.7rem;
+}
+
+.ver-group div:nth-child(1){
+    flex-grow: 1;
+    width: 50%;
+    margin-right: 0.3rem;
+}
+.ver-group div:nth-child(2){
+    flex-grow: 1;
+    width: 50%;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    background-color: #c72f8c;
+}
+
+input.vercode
+{
+    width: auto!important;
+}
+
+img.vercode-img
+{
+    float: left;
+    width: calc(100% - 1.7rem);
+    height: 1.7rem;
+}
+
+i.vercode-refresh
+{
+    display: inline-block;
+    width:1.7rem;
+    height: 1.7rem;
+    background: url(../images/icon_refresh.png) ;
+    background-size: 80% 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+i.vercode-refresh.rotate
+{
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg)}
+    to { transform: rotate(360deg)}
+}
+
+
+/*我的赛事*/
+.my-title
+{
+    text-align: center;
+    height: 23%;
+}
+.my-title img
+{
+    height: 4.0rem;
+}
+
+.my-match, .my-race
+{
+    height: 52%;
+}
+
+.my-match p, .my-race p
+{
+    color:white;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.0rem;
+    text-align: center;
+}
+
+.my-match p .num, .my-race p .num
+{
+    position: relative;
+    top: 2px;
+    padding:0 0.25rem;
+    color: transparent;
+    -webkit-text-stroke: 0.5px white;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.my-race p
+{
+    text-align: left;
+}
+
+.my-race p span
+{
+    position: relative;
+    left: 35%;
+    display: inline-block;
+    text-align: left;
+}
+.my-race p span .num
+{
+    padding-left: 0!important;
+}
+
+.my-comment
+{
+    position: relative;
+    height: 25%;
+}
+
+.my-comment .comment-img
+{
+    display: inline-block;
+    position: relative;
+    width: 4.0rem;
+    height: 6.8rem;
+    left:20%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.my-comment.usual .comment-img.male
+{
+    background-image: url(../images/myRace_Regret.png);
+}
+.my-comment.good .comment-img.male
+{
+    background-image: url(../images/myRace_comeOn.png);
+}
+.my-comment.best .comment-img.male
+{
+    background-image: url(../images/myRace_Vgood.png);
+}
+
+.my-comment.usual .comment-img.female
+{
+    background-image: url(../images/myRace_Wregret.png);
+}
+.my-comment.good .comment-img.female
+{
+    background-image: url(../images/myRace_WVrgood.png);
+}
+.my-comment.best .comment-img.female
+{
+    background-image: url(../images/img_womanComnOn.png);
+}
+
+.my-comment .comment-word
+{
+    position: absolute;
+    top: -2.5rem;
+    left:calc( 20% + 4.0rem - 0.5rem );
+    width: 6.5rem;
+    height: 4.5rem;
+    background-repeat: no-repeat;
+    background-size: 100% 100% ;
+
+}
+
+.my-comment.usual .comment-word.race
+{
+    background-image: url(../images/myRace_Regret_w.png);
+}
+.my-comment.good .comment-word.race
+{
+    background-image: url(../images/myRace_comeOn_w.png);
+}
+
+.my-comment.best .comment-word.race
+{
+    background-image: url(../images/myRace_VYgood_w.png);
+}
+
+.my-comment.usual .comment-word.trail
+{
+    background-image: url(../images/myFooter_Encourage.png);
+}
+
+.my-comment.good .comment-word.trail
+{
+    background-image: url(../images/myFooter_Good.png);
+}
+
+.my-comment.best .comment-word.trail
+{
+    background-image: url(../images/myFooter_Excellent.png);
+}
+
+
+
+.my-comment .comment-word.trail .data
+{
+    display: inline-block;
+    width: 1.8rem;
+    position: relative;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.my-comment.usual .comment-word.trail .data
+{
+    left: 20%;
+    top: 35%;
+}
+
+.my-comment.good .comment-word.trail .data
+{
+    left: 32%;
+    top: 38%;
+}
+
+.my-comment.best .comment-word.trail .data
+{
+    display: none;
+}
+
+
+
+/*我的成绩*/
+.my-score, .my-honor
+{
+    height: 77%;
+}
+
+.my-score ul, .my-honor ul
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.my-score ul li
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 16rem;
+    height: 4.8rem;
+    background-size: 100% 100%;
+    margin: 0 auto 1.5rem;
+    padding: 0.5rem 0.25rem 0.25rem;
+}
+
+.my-score ul li:nth-child(1), .my-score ul li:nth-child(3)
+{
+    background: url(../images/myChengji_2.png) no-repeat;
+    background-size: 100% 100%;
+    padding-left: 3.0rem;
+}
+
+.my-score ul li:nth-child(2)
+{
+    background: url(../images/myChengji_1.png) no-repeat;
+    background-size: 100% 100%;
+    padding-right: 3.0rem;
+}
+
+.my-score ul li p
+{
+    text-align: center;
+    color: #DB2A37;
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+}
+
+.my-honor ul li
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    position: relative;
+    width: 100%;
+    height: 5.0rem;
+    border-radius: 2.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    padding-left: 5.5rem;
+    padding-right: 2.0rem;
+    padding-top:0.2rem;
+    padding-botttom:0.2rem;
+    margin-bottom: 1.8rem;
+}
+
+.my-honor ul li p
+{
+    text-align: left;
+    color: #DB2A37;
+    font-size: 0.6rem;
+    line-height: 0.9rem;
+}
+
+.my-honor ul li i
+{
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: 5.5rem;
+    height: 5.5rem;
+}
+
+.my-honor ul li.honor3 i
+{
+    background: url(../images/XZ_3.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.my-honor ul li.honor2 i
+{
+    background: url(../images/XZ_2.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.my-honor ul li.honor1 i
+{
+    background: url(../images/XZ_1.png) no-repeat center;
+    background-size: 100% 100%;
+}
+
+
+/*没有成绩*/
+.no-score
+{
+    position: relative;
+    height: 77%;
+}
+.no-score img
+{
+    position: relative;
+    top:20%;
+    width: 100%;
+}
+.no-score .note
+{
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color:#ddd;
+
+}

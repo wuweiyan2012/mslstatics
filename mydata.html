@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--不支持 IE 古老的兼容模式,  让 IE 浏览器运行最新的渲染模式下 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--优先使用webkit内核进行渲染 -->
+    <meta name="renderer" content="webkit"/>
+    <!-- 在移动设备友中，确保适当的绘制和触屏缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>中国马拉松年度统计</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="tools/animate/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/zepto.min.js"></script>
+    <!--自定义js-->
+    <script src="js/util.js"></script>
+    <script src="js/canvas.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <div class="page-group">
+        <div class="page bg2 ">
+            <div class="content">
+                <div class="my-title">
+                    <!--<img src="images/myRace_tettle.png" alt=""/>-->
+                    <img src="images/myRace_tettle_W.png" alt=""/>
+                </div>
+                <div class="my-match">
+                    <p class="animate-element"  animate-name="fadeInUp">参加中国田径协会</p>
+                    <p class="animate-element"  animate-name="fadeInUp">共办赛事<i class="num">3</i>场</p>
+                    <p class="animate-element"  animate-name="fadeInUp">普通赛事<i class="num">2</i>场</p>
+                    <p class="animate-element"  animate-name="fadeInUp">共参加<i class="num">3</i>场赛事</p>
+                </div>
+                <!-- usual:一般 good:优秀  best：最好 , male：男性，female：女性 ,race：赛事，trail：足迹-->
+                <div class="my-comment usual">
+                    <b class="comment-img male animate-element" animate-name="zoomIn"></b>
+                    <b class="comment-word race animate-element" animate-name="zoomIn"></b>
+                </div>
+            </div>
+        </div>
+        <div class="page bg2 ">
+            <div class="content">
+                <div class="my-title">
+                    <!--<img src="images/myFooter.png" alt=""/>-->
+                    <img src="images/myFooter_W.png" alt=""/>
+                </div>
+                <div class="my-race">
+                    <p class="animate-element"  animate-name="fadeInUp"><span>去过<br><i class="num">5</i>个城市</span></p>
+                    <p class="animate-element"  animate-name="fadeInUp"><span>共跑了<br><i class="num">108</i>公里</span></p>
+                    <p class="animate-element"  animate-name="fadeInUp"><span>用了<br><i class="num">10</i>个小时</span></p>
+                </div>
+                <!-- usual:一般 good:优秀  best：最好 , male：男性，female：女性 ,race：赛事，trail：足迹-->
+                <div class="my-comment best">
+                    <b class="comment-img male animate-element" animate-name="zoomIn"></b>
+                    <b class="comment-word trail animate-element" animate-name="zoomIn"><i class="data">19%</i></b>
+                </div>
+            </div>
+        </div>
+        <div class="page bg2 ">
+            <div class="content">
+                <div class="my-title">
+                    <!--<img src="images/myChengji.png" alt=""/>-->
+                    <img src="images/myChengji_W.png" alt=""/>
+                </div>
+                <div class="my-score">
+                    <ul>
+                        <li class="animate-element"  animate-name="fadeInRight">
+                            <p>全程马拉松</p>
+                            <p>2016年海南（三亚）国际马拉松</p>
+                            <p>成绩：05:30:14</p>
+                        </li>
+                        <li class="animate-element"  animate-name="fadeInLeft">
+                            <p>半程马拉松</p>
+                            <p>南京溧水国际山地半程马拉松</p>
+                            <p>成绩：02:30:14</p>
+                        </li>
+                        <li class="animate-element"  animate-name="fadeInRight">
+                            <p>10公里</p>
+                            <p>2016年海南（三亚）国际马拉松</p>
+                            <p>成绩：01:00:14</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page bg2 ">
+            <div class="content">
+                <div class="my-title">
+                    <!--<img src="images/Rongyu_tittle.png" alt=""/>-->
+                    <img src="images/Rongyu_tittle_W.png" alt=""/>
+                </div>
+                <div class="my-honor">
+                    <ul>
+                        <li class="honor3 animate-element" animate-name="fadeInRight">
+                            <i class="animate-element" animate-name="rotateIn"></i>
+                            <p>2016年海南（三亚）国际马拉松</p>
+                            <p>项目：全程马拉松</p>
+                            <p>成绩：05:30:14</p>
+                            <p>年龄组：25-33岁</p>
+                        </li>
+                        <li class="honor2 animate-element" animate-name="fadeInRight">
+                            <i class="animate-element" animate-name="rotateIn"></i>
+                            <p>南京溧水国际山地半程马拉松程马拉松程马拉松</p>
+                            <p>项目：半程马拉松</p>
+                            <p>成绩：02:30:14</p>
+                            <p>年龄组：25-33岁</p>
+                        </li>
+                        <li class="honor1 animate-element" animate-name="fadeInRight">
+                            <i class="animate-element" animate-name="rotateIn"></i>
+                            <p>2016年海南国际马拉松</p>
+                            <p>项目：10公里</p>
+                            <p>成绩：01:00:14</p>
+                            <p>年龄组：25-33岁</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page ">
+            <div class="my-title">
+                <!--<img src="images/myChengji.png" alt=""/>-->
+                <img src="images/myChengji_W.png" alt=""/>
+            </div>
+            <div class="no-score">
+                <img class="animate-element" animate-name="zoomIn" src="images/img_noRace.png" alt=""/>
+                <p class="note animate-element" animate-name="fadeInUp">仅针对10公里/半程马拉松/全程马拉松统计</p>
+            </div>
+        </div>
+    </div>
+    <i class="swipe-down"></i>
+</div>
+</body>
+</html>

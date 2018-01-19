@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--不支持 IE 古老的兼容模式,  让 IE 浏览器运行最新的渲染模式下 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--优先使用webkit内核进行渲染 -->
+    <meta name="renderer" content="webkit"/>
+    <!-- 在移动设备友中，确保适当的绘制和触屏缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>中国马拉松年度统计</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="tools/animate/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/zepto.min.js"></script>
+    <script src="tools/EChart/echarts_custom.js"></script>
+    <script src="tools/EChart/macarons.js"></script>
+    <!--自定义js-->
+    <script src="js/util.js"></script>
+    <script src="js/canvas.js"></script>
+</head>
+<body>
+    <div id="wraper" class="wraper">
+        <div class="page-group">
+            <div class="page bg1 ">
+                <div class="content">
+                    <div class="start-title">
+                        <img class="animate-element" animate-name="fadeInRight" src="images/start_img.png" alt=""/>
+                    </div>
+                    <div class="start-logo">
+                        <img class="animate-element" animate-name="fadeIn" src="images/defoult_img.png" alt=""/>
+                    </div>
+                    <div class="start-word">
+                        <span class="animate-element" animate-name="fadeInUp">我们是基于中国马拉松平台的官方数据统计</span>
+                    </div>
+                </div>
+            </div>
+            <div class="page bg1 ">
+                <div class="content">
+                    <div class="mcount-title">
+                        <img src="images/tittle_date.png" alt=""/>
+                    </div>
+                    <ul class="mcount-content">
+                        <li class="animate-element" animate-name="fadeInUp flipInX"><span>参赛人次约280万人次</span></li>
+                        <li class="animate-element" animate-name="fadeInUp flipInX"><span>全国注册赛事328场</span></li>
+                        <li class="animate-element" animate-name="fadeInUp flipInX"><span>共办赛事122场</span></li>
+                        <li class="animate-element" animate-name="fadeInUp flipInX"><span>A类赛事122场</span></li>
+                        <li class="animate-element" animate-name="fadeInUp flipInX"><span>B类赛事122场</span></li>
+                        <li class="animate-element" animate-name="fadeInUp flipInX"><span>赛道认证赛事122场</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page bg1 ">
+                <div class="content">
+                    <div class="gender">
+                        <div class="title gender-title"><span>参赛选手性别分析</span><i></i></div>
+                        <ul class="gender-content">
+                           <li class="animate-element" animate-name="fadeInLeft"><img src="images/img_man.png" alt=""/><span>1241808人</span></li>
+                           <li class="animate-element" animate-name="fadeInRight"><img src="images/img_woman.png" alt=""/><span>466788人</span></li>
+                        </ul>
+                    </div>
+                    <div class="age">
+                        <div class="title age-title"><span>参赛选手年龄分析</span><i></i></div>
+                        <div class="age-content animate-element" animate-name="zoomIn"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page bg1 ">
+                <div class="content">
+                    <div class="pro ">
+                        <div class="title pro-title"><span>各省份办赛场次分析</span><i></i></div>
+                        <div class="pro-content animate-element" animate-name="zoomIn"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page bg1 ">
+                <div class="content">
+                    <div class="pro">
+                        <div class="title pro-title"><span>各省份办赛场次分析</span><i></i></div>
+                        <div class="pro-content2 animate-element" animate-name="fadeInRight"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page bg2 bg2_2 page-query">
+                <div class="query content">
+                    <div class="query-word">
+                        <img class="animate-element" animate-name="fadeInRight" src="images/query_img.png" alt=""/>
+                    </div>
+                    <div class="query-img">
+                        <img class="animate-element" animate-name="zoomIn" src="images/login_runner.png" alt=""/>
+                    </div>
+                    <div class="query-form">
+                        <form action="">
+                            <div class="form-group animate-element" animate-name="fadeInUp">
+                                <input type="text" name="username" placeholder="请输入姓名"/>
+                            </div>
+                            <div class="form-group animate-element" animate-name="fadeInUp">
+                                <input type="text" name="idcard" placeholder="请输入身份证号"/>
+                            </div>
+                            <div class="form-group animate-element" animate-name="fadeInUp">
+                                <div class="ver-group">
+                                    <div>
+                                        <input type="text" name="vercode"  placeholder="请输入验证码"/>
+                                    </div>
+                                    <div>
+                                        <img class="vercode-img" src="images/vercode.png" alt=""/>
+                                        <i class="vercode-refresh"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group animate-element" animate-name="fadeInUp">
+                                <button type="submit" onclick="doQuery(event)">立即体验</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i class="swipe-down"></i>
+    </div>
+<script>
+    $(function(){
+        initVercode();
+        createAgeCount();
+        createProCount();
+        createProCount2();
+    });
+
+    //初始化验证码
+    function initVercode()
+    {
+        if($(".ver-group").size() == 0) return;
+
+        $(".ver-group .vercode-refresh").tap(function(){
+            $(".ver-group .vercode-img").attr("src", 'template/default/public/js/securimage/securimage_show.php?' + Math.random());
+            $(this).addClass("rotate");
+        });
+
+        $(".ver-group .vercode-img").load(function(){
+            $(".ver-group .vercode-refresh").removeClass("rotate");
+        });
+        $(".ver-group .vercode-img").error(function(){
+            $(".ver-group .vercode-refresh").removeClass("rotate");
+        });
+    }
+
+    //创建年龄分析饼状图
+    function createAgeCount()
+    {
+        var option = {
+
+            color:['#203eff','#fff73b','#12cc40','#38b7ff','#ff08a9','#dd88ff','#ff963a','#02f8ff','#fffdbd'],
+            legend: {
+                selectedMode: false,
+                textStyle:{
+                    color:'#dddddd'
+                },
+
+                orient : 'vertical',
+                x : 'right',
+                data:['29岁以下','30-34岁','35-39岁','40-44岁','45-49岁','50-54岁','55-59岁','60-64岁','65岁以上']
+            },
+            calculable : false,
+            series : [
+                {
+                    type:'pie',
+                    radius : [25, 40],
+                    center: ['38%', '40%'],
+
+                    data:[
+                        {value:236990, name:'29岁以下'},
+                        {value:132270, name:'30-34岁'},
+                        {value:115802, name:'35-39岁'},
+                        {value:106724, name:'40-44岁'},
+                        {value:79043, name:'45-49岁'},
+                        {value:36775, name:'50-54岁'},
+                        {value:12312, name:'55-59岁'},
+                        {value:7884, name:'60-64岁'},
+                        {value:2938, name:'65岁以上'}
+                    ],
+
+                    itemStyle:{
+                        normal:{
+                            label:{
+                                show: true,
+                                formatter: '{d}%',
+                                //textStyle:{color:'#dddddd'}
+                            },
+                            labelLine :{show:true}
+                        }
+                    }
+
+                }
+            ]
+        };
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = echarts.init($(".age .age-content")[0]);
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+
+    //创建各省份办赛场次地图
+    function createProCount()
+    {
+        var option = {
+            dataRange: {
+                x: 'left',
+                y: 'bottom',
+                splitList: [
+                    {start: 30},
+                    {start: 20, end: 30},
+                    {start: 10, end: 20},
+                    {start: 5, end: 10},
+                    {start: 2, end: 5},
+                    {end: 2}
+                ],
+                selectedMode: false,
+                textStyle: {
+                    color: '#ddd'          // 值域文字颜色
+                },
+                color: ['#2254ff', '#4683ff', '#7bceff', '#b2e9ff', '#c2ffdd', '#cbffbd']
+                //color: ['rgb(237, 163, 29)', 'rgb(255, 220,36)', 'rgb(242, 255, 38)', 'rgb(243, 254, 113)', 'rgb(244, 255, 158)', 'rgb(213, 255, 181)',]
+            },
+            series : [
+                {
+                    name: '各省份举办赛事场次',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,
+                    itemStyle:{
+                        normal:{
+                            label:{
+                                show:true,
+                                textStyle: {
+                                    color: "#333",
+                                    fontSize: '8'
+                                }
+                            }
+                        },
+                        emphasis:{label:{show:true}}
+                    },
+                    data:[
+                        {name: '北京',value: 36},
+                        {name: '天津',value: 2},
+                        {name: '河北',value: 19},
+                        {name: '内蒙古',value: 11},
+                        {name: '山西',value:4},
+                        {name: '辽宁',value: 12},
+                        {name: '吉林',value: 6},
+                        {name: '黑龙江',value: 11},
+                        {name: '上海',value:15},
+                        {name: '江苏',value: 34},
+                        {name: '浙江',value:20},
+                        {name: '安徽',value: 17},
+                        {name: '福建',value: 16},
+                        {name: '江西',value:6},
+                        {name: '山东',value:20},
+                        {name: '河南',value: 6},
+                        {name: '湖北',value: 9},
+                        {name: '湖南',value: 8},
+                        {name: '广东',value: 26},
+                        {name: '广西',value: 2},
+                        {name: '海南',value:9},
+                        {name: '重庆',value: 7},
+                        {name: '四川',value: 13},
+                        {name: '贵州',value: 12},
+                        {name: '云南',value: 7},
+                        {name: '陕西',value: 6},
+                        {name: '甘肃',value: 5},
+                        {name: '青海',value:2},
+                        {name: '宁夏',value: 1},
+                        {name: '新疆',value: 1},
+
+                        {name: '香港',value: 0},
+                        {name: '澳门',value: 0},
+                        {name: '台湾',value: 0},
+                        {name: '西藏',value: 0}
+                    ]
+                }
+            ]
+        };
+
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = echarts.init($(".pro .pro-content")[0]);
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+
+    //创建各省份办赛场次条形图
+    function createProCount2()
+    {
+        option = {
+
+            calculable: false,
+            grid: {
+                borderWidth: 0,
+                x:50,
+                x2: 0,
+                y: 30,
+                y2:0
+            },
+            yAxis: [
+                {
+                    type: 'category',
+                    show: true,
+                    data: ['新疆', '宁夏', '青海', '甘肃', '陕西', '云南', '贵州', '四川', '重庆', '海南', '广西','广东','湖南','湖北','河南','山东','江西','福建','安徽','浙江','江苏','上海','黑龙江','吉林','辽宁','内蒙古','山西','河北','天津','北京'],
+                    axisTick: { show: false },
+                    axisLine:{ lineStyle : { color : '#aaa', width:1}},
+                    axisLabel: { textStyle: { color : '#ddd', fontSize: 10}},
+                    splitLine: { show:false}
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'value',
+                    show: false,
+                }
+            ],
+            series: [
+                {
+                    type: 'bar',
+                    barCategoryGap: '30%',
+                    barWidth: 8,
+                    itemStyle: {
+                        normal: {
+                            color: function(params) {
+                                // build a color map as your need.
+                                var colorList = [
+                                    '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                                    '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                                    '#37A04B','#C6E579','#F4E001','#F0805A','#26C0C0',
+                                    '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                                    '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                                    '#37A04B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                                ];
+                                return colorList[params.dataIndex]
+                            },
+                            label: {
+                                show: true,
+                                position: 'right',
+                                formatter: '{c}'
+                            }
+                        }
+                    },
+                    data: [1,1,2,5,6,7,12,13,7,9,2,26,8,9,6,20,6,16,17,20,34,15,11,6,12,11,4,19,2,36]
+                }
+            ]
+        };
+
+
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = echarts.init($(".pro .pro-content2")[0], theme);
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+
+    //查询个人信息
+    function doQuery(e)
+    {
+        e.preventDefault();
+
+
+        var name = $(".query-form input[name='username']").val();
+        var id = $(".query-form input[name='idcard']").val();
+        var vercode = $(".query-form input[name='vercode']").val();
+
+        if(isEmptyString(name) || isEmptyString(id))
+        {
+            $.showToast("请输入姓名和身份证号码");
+            return false;
+        }
+
+        if(isEmptyString(vercode))
+        {
+            $.showToast("请输入验证码");
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "./demo/ajax.txt",
+            data: {name: name, idcard: id, vercode: vercode},
+            dataType: "json",
+            timeout: 10000,
+            success: function (rs) {
+                //hideLoading();    //关闭加载指示器
+                if (rs.appCode == 0) {  //操作成功
+                    $(".query-form form").submit();
+                } else {    //操作失败
+                    $.showToast(rs.appMsg);
+
+                    if (rs.appCode == -1) {  //验证码错误
+                        $(".ver-group .vercode-refresh").trigger("tap")
+                    }
+                }
+            },
+            error: function (req, error) {
+                //hideLoading();   //关闭加载指示器
+                switch (req.status) {
+                    case 408:
+                        showToast("连接超时");
+                        break;
+
+                    default:
+                        //showToast("请求失败");
+                        showToast(req.status);
+                        break;
+                }
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>
